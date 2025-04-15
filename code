@@ -1,0 +1,145 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+class Book {
+    String title;
+    String author;
+    int id;
+    boolean isIssued;
+
+    Book(int id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isIssued = false;
+    }
+
+    public String toString() {
+        return "[ID: " + id + ", Title: " + title + ", Author: " + author + ", Issued: " + isIssued + "]";
+    }
+}
+
+public class LibraryManagementSystem {
+    static LinkedList<Book> catalog = new LinkedList<>();
+    static Book[] issuedBooks = new Book[100];
+    static int issuedCount = 0;
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int choice;
+        do {
+            System.out.println("\n--- Library Menu ---");
+            System.out.println("1. Add Book");
+            System.out.println("2. Remove Book");
+            System.out.println("3. Search Book");
+            System.out.println("4. Issue Book");
+            System.out.println("5. Return Book");
+            System.out.println("6. Show All Books");
+            System.out.println("7. Sort Books by Title");
+            System.out.println("0. Exit");
+            System.out.print("Choose option: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1 -> addBook();
+                case 2 -> removeBook();
+                case 3 -> searchBook();
+                case 4 -> issueBook();
+                case 5 -> returnBook();
+                case 6 -> showBooks();
+                case 7 -> sortBooks();
+            }
+        } while (choice != 0);
+    }
+
+    static void addBook() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt(); sc.nextLine();
+        System.out.print("Enter Title: ");
+        String title = sc.nextLine();
+        System.out.print("Enter Author: ");
+        String author = sc.nextLine();
+
+        catalog.add(new Book(id, title, author));
+        System.out.println("Book added.");
+    }
+
+    static void removeBook() {
+        System.out.print("Enter Book ID to remove: ");
+        int id = sc.nextInt();
+        boolean removed = catalog.removeIf(book -> book.id == id);
+        System.out.println(removed ? "Book removed." : "Book not found.");
+    }
+
+    static void searchBook() {
+        System.out.print("Enter title to search: ");
+        String keyword = sc.nextLine();
+        boolean found = false;
+        for (Book b : catalog) {
+            if (b.title.toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println(b);
+                found = true;
+            }
+        }
+        if (!found) System.out.println("No matching books found.");
+    }
+
+    static void issueBook() {
+        System.out.print("Enter Book ID to issue: ");
+        int id = sc.nextInt();
+        for (Book b : catalog) {
+            if (b.id == id && !b.isIssued) {
+                b.isIssued = true;
+                issuedBooks[issuedCount++] = b;
+                System.out.println("Book issued.");
+                return;
+            }
+        }
+        System.out.println("Book not available or already issued.");
+    }
+
+    static void returnBook() {
+        System.out.print("Enter Book ID to return: ");
+        int id = sc.nextInt();
+        for (int i = 0; i < issuedCount; i++) {
+            if (issuedBooks[i].id == id) {
+                issuedBooks[i].isIssued = false;
+                System.out.println("Book returned.");
+                issuedBooks[i] = issuedBooks[--issuedCount];  // Remove from array
+                return;
+            }
+        }
+        System.out.println("Book was not issued.");
+    }
+
+    static void showBooks() {
+        if (catalog.isEmpty()) {
+            System.out.println("No books in catalog.");
+        } else {
+            for (Book b : catalog) {
+                System.out.println(b);
+            }
+        }
+    }
+
+    static void sortBooks() {
+        Book[] booksArray = catalog.toArray(new Book[0]);
+
+        // Bubble sort by title
+        for (int i = 0; i < booksArray.length - 1; i++) {
+            for (int j = 0; j < booksArray.length - i - 1; j++) {
+                if (booksArray[j].title.compareToIgnoreCase(booksArray[j + 1].title) > 0) {
+                    Book temp = booksArray[j];
+                    booksArray[j] = booksArray[j + 1];
+                    booksArray[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("Books sorted by title:");
+        for (Book b : booksArray) {
+            System.out.println(b);
+        }
+    }
+}
