@@ -3,9 +3,8 @@
 ## 📚 Library Management System – OEL Project Report
 
 ### 🧑‍💻 Student Information:
-- **Name:** [Your Name]  
-- **Roll Number:** [Your Roll Number]  
-- **Subject:** Open Ended Lab  
+- **Name:** [MIRZA ZAEEM BAIG (65347), FATIMA MIRZA(62655), SHOETA KUMARI(61265)]  
+- **Subject:** [Open Ended Lab]  
 - **Semester:** [Your Semester]  
 - **Faculty Guide:** [Faculty Name]  
 
