@@ -5,8 +5,7 @@
 ### 🧑‍💻 Student Information:
 - **Name:** [MIRZA ZAEEM BAIG (65347), FATIMA MIRZA(62655), SHOETA KUMARI(61265)]  
 - **Subject:** [Open Ended Lab]  
-- **Semester:** [Your Semester]  
-- **Faculty Guide:** [Faculty Name]  
+- **Faculty Guide:** [SIR KAMRAN]  
 
 ---
 
