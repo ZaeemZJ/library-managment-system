@@ -6,8 +6,8 @@
 - **Name:** [MIRZA ZAEEM BAIG (65347), FATIMA MIRZA(62655), SHOETA KUMARI(61265)]  
 - **Subject:** [Open Ended Lab]  
 - **Faculty Guide:** [SIR KAMRAN]  
+- **Subject:** [DSA lab]
 
----
 
 ### 📝 Project Title:
 **Library Management System using Java**
